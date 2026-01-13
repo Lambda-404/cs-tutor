@@ -1,5 +1,5 @@
 {
-  "name": "Copy of A-Level CS 9618 Tutor-Phone",
+  "name": "A-Level CS 9618 Tutor",
   "description": "An AI-powered tutor for Cambridge International AS & A Level Computer Science (9618), featuring chat, quizzes with gamification, and an intelligent coursework grader, wrapped in a stunning liquid glass UI.",
   "requestFramePermissions": [
     "microphone",

@@ -6,7 +6,8 @@ export enum AppMode {
   Quiz = 'QUIZ',
   Grader = 'GRADER',
   Sandbox = 'SANDBOX',
-  Mistakes = 'MISTAKES'
+  Mistakes = 'MISTAKES',
+  MockExam = 'MOCK_EXAM'
 }
 
 export enum Sender {
@@ -78,6 +79,29 @@ export interface MistakeEntry {
   notes: string;
   date: string;
   lastReviewed?: string;
+}
+
+export interface MockExamQuestion {
+  id: number;
+  question: string;
+  marks: number;
+  userAnswer?: string;
+}
+
+export interface MockExamPaper {
+  id: string;
+  title: string;
+  type: 'paper1' | 'paper2';
+  durationMinutes: number;
+  questions: MockExamQuestion[];
+}
+
+export interface MockExamResult {
+  totalMarks: number;
+  userMarks: number;
+  grade: string; // A*, A, B, C, D, E, U
+  feedback: string;
+  questionFeedback: { id: number; feedback: string; marksAwarded: number }[];
 }
 
 export type AwardXPCallback = (amount: number, reason?: string) => void;
