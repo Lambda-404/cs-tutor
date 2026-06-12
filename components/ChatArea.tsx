@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Message, Sender, Attachment, TeachingPersona, Language, AwardXPCallback, ChatConfig } from '../types';
 import { SendIcon, AttachmentIcon, XIcon, RobotIcon, CopyIcon, CheckIcon, BrainIcon, SearchIcon, GlobeIcon } from './Icons';
 import { chatWithGemini } from '../services/geminiService';
+import { LiquidSegmentedControl } from './LiquidSegmentedControl';
 
 declare global {
   interface Window {
@@ -396,21 +397,11 @@ const ChatArea: React.FC<ChatAreaProps> = ({ language, onAwardXP }) => {
             {/* Toggles */}
             <div className="flex items-center gap-2 mb-3">
                 {/* Persona Switch */}
-                <div className="flex items-center p-1 rounded-full glass-panel shadow-tier-1">
-                    {(['standard', 'socratic', 'examiner'] as TeachingPersona[]).map((p) => (
-                        <button
-                            key={p}
-                            onClick={() => setPersona(p)}
-                            className={`px-4 py-1.5 rounded-full text-xs font-medium interactive ${
-                                persona === p 
-                                ? 'bg-white dark:bg-[#636366] text-black dark:text-white shadow-tier-1' 
-                                : 'text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white'
-                            }`}
-                        >
-                            {t[p]}
-                        </button>
-                    ))}
-                </div>
+                <LiquidSegmentedControl
+                    options={(['standard', 'socratic', 'examiner'] as TeachingPersona[]).map(p => ({ id: p, label: t[p] }))}
+                    activeId={persona}
+                    onSelect={(id) => setPersona(id as TeachingPersona)}
+                />
 
                 {/* Features Toggles */}
                 <div className="flex items-center p-1 rounded-full glass-panel shadow-tier-1">

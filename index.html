@@ -69,14 +69,15 @@
         --text-primary: #1D1D1F;
         
         /* Shadows (Light Mode) */
-        --shadow-low: 0 6px 12px rgba(0,0,0,0.08);
-        --shadow-mid: 0 12px 24px rgba(0,0,0,0.12);
-        --shadow-high: 0 20px 40px rgba(0,0,0,0.18);
+        --shadow-low: 0 4px 24px -1px rgba(0,0,0,0.1), 0 2px 8px -1px rgba(0,0,0,0.06);
+        --shadow-mid: 0 12px 48px -4px rgba(0,0,0,0.15), 0 4px 16px -2px rgba(0,0,0,0.08);
+        --shadow-high: 0 24px 80px -8px rgba(0,0,0,0.2), 0 8px 32px -4px rgba(0,0,0,0.12);
 
-        /* Glass (Light Mode) */
-        --glass-bg: rgba(255, 255, 255, 0.65);
-        --glass-border: rgba(255, 255, 255, 0.4);
-        --glass-blur: 10px;
+        /* Liquid Glass (Light Mode) */
+        --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+        --glass-border: rgba(255, 255, 255, 0.5);
+        --glass-border-inset: rgba(255, 255, 255, 0.8);
+        --glass-blur: 40px;
       }
 
       html.dark {
@@ -84,36 +85,55 @@
         --bg-color: #000000;
         --text-primary: #F5F5F7;
 
-        /* Shadows (Dark Mode - Slightly Stronger/Darker) */
-        --shadow-low: 0 6px 12px rgba(0,0,0,0.28);
-        --shadow-mid: 0 12px 24px rgba(0,0,0,0.32);
-        --shadow-high: 0 20px 40px rgba(0,0,0,0.38);
+        /* Shadows (Dark Mode) */
+        --shadow-low: 0 4px 24px -1px rgba(0,0,0,0.4), 0 2px 8px -1px rgba(0,0,0,0.3);
+        --shadow-mid: 0 12px 48px -4px rgba(0,0,0,0.5), 0 4px 16px -2px rgba(0,0,0,0.4);
+        --shadow-high: 0 24px 80px -8px rgba(0,0,0,0.7), 0 8px 32px -4px rgba(0,0,0,0.5);
 
-        /* Glass (Dark Mode) */
-        --glass-bg: rgba(28, 28, 30, 0.60);
-        --glass-border: rgba(255, 255, 255, 0.08);
+        /* Liquid Glass (Dark Mode) */
+        --glass-bg: linear-gradient(135deg, rgba(40, 40, 45, 0.6) 0%, rgba(20, 20, 25, 0.3) 100%);
+        --glass-border: rgba(255, 255, 255, 0.15);
+        --glass-border-inset: rgba(255, 255, 255, 0.05);
+        --glass-blur: 40px;
+      }
+
+      html, body, #root {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
       }
 
       body {
         font-family: 'Inter', sans-serif;
         background-color: var(--bg-color);
         color: var(--text-primary);
-        overflow: hidden;
-        /* Global Transition Optimization: Added border-color and box-shadow for smoother theme switching */
+        /* Global Transition Optimization */
         transition: background-color 0.4s cubic-bezier(.22,.9,.31,1), color 0.4s cubic-bezier(.22,.9,.31,1), border-color 0.4s cubic-bezier(.22,.9,.31,1), box-shadow 0.4s cubic-bezier(.22,.9,.31,1);
         -webkit-font-smoothing: antialiased;
       }
 
       /* --- GLOBAL COMPONENT CLASSES --- */
 
-      /* 1. Glass Panel (The core material) */
-      .glass-panel {
-        background-color: var(--glass-bg);
-        backdrop-filter: blur(var(--glass-blur));
-        -webkit-backdrop-filter: blur(var(--glass-blur));
+      /* 1. Liquid Glass Window (Root level material, heavy blur) */
+      .glass-window {
+        background: var(--glass-bg);
+        backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+        -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
         border: 1px solid var(--glass-border);
-        box-shadow: var(--shadow-low);
-        transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+        box-shadow: inset 0 1px 1px var(--glass-border-inset), var(--shadow-low);
+        transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+      }
+
+      /* 2. Liquid Glass Panel (Nested layer, lighter blur) */
+      .glass-panel {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px) saturate(120%);
+        -webkit-backdrop-filter: blur(20px) saturate(120%);
+        border: 1px solid var(--glass-border);
+        box-shadow: inset 0 1px 1px var(--glass-border-inset), var(--shadow-low);
+        transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
       }
 
       /* 2. Interactive Element (Buttons, Cards) */

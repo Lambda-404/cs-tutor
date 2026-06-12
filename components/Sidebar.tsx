@@ -57,7 +57,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentMode, setMode, stats, theme, t
   ];
 
   return (
-    <div className="w-20 md:w-64 h-full flex flex-col rounded-[2.5rem] glass-panel shadow-tier-2 animate-slide-in overflow-hidden z-30 relative">
+    <div className="w-20 md:w-64 h-full flex flex-col rounded-[2.5rem] glass-window shadow-tier-2 animate-slide-in overflow-hidden z-30 relative">
       
       {/* App Header */}
       <div className="p-6 pb-4 flex items-center justify-center md:justify-start space-x-3 mt-2 flex-shrink-0">

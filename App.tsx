@@ -145,17 +145,18 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="h-screen w-screen overflow-hidden bg-[#F2F2F7] dark:bg-black flex items-center justify-center relative transition-colors duration-500 selection:bg-blue-500/30 font-sans">
+    <div className="h-full w-full overflow-hidden bg-[#F2F2F7] dark:bg-black flex items-center justify-center transition-colors duration-500 selection:bg-blue-500/30 font-sans relative">
       
       {/* Visual Feedback Toast */}
       <XPToast amount={toast.amount} reason={toast.reason} visible={toast.visible} />
 
-      {/* Ambient Background Effects */}
-      <div className="absolute top-1/4 left-1/4 w-[40vw] h-[40vh] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse" style={{ animationDuration: '8s' }}></div>
-      <div className="absolute bottom-1/4 right-1/4 w-[40vw] h-[40vh] bg-purple-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse" style={{ animationDuration: '10s', animationDelay: '1s' }}></div>
+      {/* Enhanced Ambient Background Effects for Liquid Glass */}
+      <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded-full blur-[120px] pointer-events-none animate-pulse" style={{ animationDuration: '12s' }}></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-gradient-to-tr from-purple-500/30 to-orange-500/30 rounded-full blur-[120px] pointer-events-none animate-pulse" style={{ animationDuration: '15s', animationDelay: '2s' }}></div>
+      <div className="absolute top-[30%] left-[40%] w-[40%] h-[40%] bg-gradient-to-r from-teal-400/20 to-blue-500/20 rounded-full blur-[100px] pointer-events-none animate-pulse" style={{ animationDuration: '10s', animationDelay: '5s' }}></div>
 
       {/* Main App Floating Wrapper */}
-      <div className="w-[96vw] h-[92vh] md:w-[94vw] md:h-[90vh] max-w-[1700px] flex flex-row gap-6 z-20">
+      <div className="w-[96%] h-[92%] md:w-[94%] md:h-[90%] max-w-[1700px] flex flex-row gap-6 z-20">
         
         {/* Sidebar */}
         <div className="flex-shrink-0 h-full">
@@ -171,7 +172,7 @@ const App: React.FC = () => {
         </div>
         
         {/* Main Content Area */}
-        <main className="flex-1 h-full relative rounded-[2.5rem] bg-white dark:bg-[#1C1C1E] shadow-apple dark:shadow-apple-dark border border-white/50 dark:border-white/5 ring-1 ring-black/5 dark:ring-white/5 overflow-hidden transition-colors duration-300">
+        <main className="glass-window flex-1 h-full relative rounded-[2.5rem] overflow-hidden transition-colors duration-300">
             <div key={currentMode} className="w-full h-full animate-enter">
               {currentMode === AppMode.Dashboard && <Dashboard stats={stats} language={language} setMode={setCurrentMode} />}
               {currentMode === AppMode.Chat && <ChatArea language={language} onAwardXP={handleAwardXP} />}
